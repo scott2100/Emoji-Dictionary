@@ -9,13 +9,12 @@
 import UIKit
 
 class EmojiTableViewController: UITableViewController {
-
-    var emojis = ["😎", "😀", "⛪️", "🌁"]
+    
+    var emojis : [Emoji] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-       
+        emojis = createEmojis()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int)
@@ -28,7 +27,7 @@ class EmojiTableViewController: UITableViewController {
         -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
         
-        cell.textLabel?.text = emojis[indexPath.row]
+        cell.textLabel?.text = emojis[indexPath.row].theEmoji
             
         return cell
     }
@@ -41,7 +40,36 @@ class EmojiTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let emojiDefVC = segue.destination as! EmojiDefinitionViewController
-        emojiDefVC.emoji = sender as! String
+        emojiDefVC.emoji = sender as! Emoji
+    }
+    
+    func createEmojis() -> [Emoji] {
+        
+        let shades = Emoji()
+        shades.theEmoji = "😎"
+        shades.releaseDate = 2010
+        shades.category = "Faces"
+        emojis.append(shades)
+        
+        let smiley = Emoji()
+        smiley.theEmoji = "😀"
+        smiley.releaseDate = 2017
+        smiley.category = "Faces"
+        emojis.append(smiley)
+        
+        let church = Emoji()
+        church.theEmoji = "⛪️"
+        church.releaseDate = 2000
+        church.category = "Buildings"
+        emojis.append(church)
+        
+        let paintingBridge = Emoji()
+        paintingBridge.theEmoji = "🌁"
+        paintingBridge.releaseDate = 2012
+        paintingBridge.category = "Paintings"
+        emojis.append(paintingBridge)
+        
+        return [shades, smiley, church, paintingBridge]
     }
 
 }

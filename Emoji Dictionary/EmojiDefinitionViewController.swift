@@ -12,15 +12,23 @@ class EmojiDefinitionViewController: UIViewController {
 
     @IBOutlet weak var emojiLabel: UILabel!
     @IBOutlet weak var emojiDefinitionLabel: UILabel!
-    var emoji = ""
+    @IBOutlet weak var birthLabel: UILabel!
+    @IBOutlet weak var categoryLabel: UILabel!
+    
+    
+    var emoji = Emoji()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        emojiLabel.text = emoji
+        emojiLabel.text = emoji.theEmoji
+        birthLabel.text = String(emoji.releaseDate)
+        categoryLabel.text = emoji.category
         
-        let emojiString = emoji
+        
+        let emojiString = emoji.theEmoji
         let result = emojiString.applyingTransform(.toUnicodeName, reverse: false)
         emojiDefinitionLabel.text = result
+        
     }
 }
